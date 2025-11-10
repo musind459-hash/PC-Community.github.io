@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Friend Community - Лучшее игровое сообщество</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-green: #57F287;
+            --discord-yellow: #FEE75C;
+            --discord-red: #ED4245;
+            --discord-dark: #1e1f22;
+            --discord-darker: #111214;
+            --admin-color: #ff6b6b;
+            --mod-color: #4ecdc4;
+            --vip-color: #ffd93d;
+            --text-primary: #ffffff;
+            --text-secondary: #b5bac1;
+            --card-bg: #2b2d31;
+            --hover-bg: #35373c;
+        }
+
+        body {
+            font-family: 'Inter', 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--discord-darker);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--discord-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--discord-blurple);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4752c4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(30, 31, 34, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--discord-blurple), var(--discord-green));
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--discord-blurple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--discord-blurple);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            background: #4752C4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--discord-darker) 0%, var(--discord-dark) 50%, #1a1b1e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(88, 101, 242, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(87, 242, 135, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(254, 231, 92, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--discord-blurple), var(--discord-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--discord-blurple);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
+        }
+
+        /* Staff Section */
+        .staff {
+            padding: 120px 0;
+            background: var(--discord-dark);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .staff-category {
+            margin-bottom: 5rem;
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: var(--discord-green);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--discord-green), transparent);
+        }
+
+        .staff-card {
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .staff-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .staff-card.high-admin::before {
+            background: linear-gradient(90deg, var(--admin-color), #ff8e8e);
+        }
+
+        .staff-card.admin::before {
+            background: linear-gradient(90deg, var(--mod-color), #76e0d9);
+        }
+
+        .staff-card.deputy::before {
+            background: linear-gradient(90deg, var(--vip-color), #ffe770);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px);
+            background: var(--hover-bg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .staff-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--discord-blurple), var(--discord-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .staff-role {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .high-admin .staff-role {
+            background: var(--admin-color);
+            color: white;
+        }
+
+        .admin .staff-role {
+            background: var(--mod-color);
+            color: black;
+        }
+
+        .deputy .staff-role {
+            background: var(--vip-color);
+            color: black;
+        }
+
+        .staff-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .staff-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Rules Section */
+        .rules {
+            padding: 120px 0;
+            background: var(--discord-darker);
+            position: relative;
+        }
+
+        .rules-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .rule-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            border-left: 5px solid var(--discord-blurple);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .rule-item:hover {
+            transform: translateX(10px);
+            background: var(--hover-bg);
+        }
+
+        .rule-icon {
+            background: var(--discord-blurple);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .rule-content {
+            flex: 1;
+        }
+
+        .rule-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .rule-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .rule-item.special {
+            border-left-color: var(--discord-green);
+            background: linear-gradient(135deg, rgba(87, 242, 135, 0.1), rgba(88, 101, 242, 0.1));
+        }
+
+        .rule-item.special .rule-icon {
+            background: var(--discord-green);
+        }
+
+        .special-badge {
+            background: var(--discord-green);
+            color: black;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--discord-darker);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--discord-blurple);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--discord-blurple);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Loading Animation */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--discord-blurple), var(--discord-green));
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--discord-blurple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Dark Mode Toggle (for future use) */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Bar -->
+    <div class="loading-bar" id="loadingBar"></div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    PC Friend Community
+                </a>
+                <div class="nav-links">
+                    <a href="#staff">Команда</a>
+                    <a href="#rules">Правила</a>
+                    <a href="#features">Возможности</a>
+                    <a href="#join">Присоединиться</a>
+                </div>
+                <a href="https://discord.gg/aPCCUsWa" class="cta-button" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    Войти
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>PC Friend Community</h1>
+                <p>Самое дружелюбное сообщество геймеров и IT-энтузиастов. Присоединяйся к нам и стань частью нашей семьи!</p>
+                <a href="https://discord.gg/aPCCUsWa" class="discord-btn" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    Присоединиться к серверу
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="staff" id="staff">
+        <div class="container">
+            <h2 class="section-title">Наша Команда</h2>
+            <p class="section-subtitle">Знакомьтесь с людьми, которые делают наше сообщество лучше каждый день</p>
+            
+            <div class="staff-category">
+                <h3 class="category-title">Высшая Администрация</h3>
+                <div class="staff-grid">
+                    <div class="staff-card high-admin">
+                        <div class="staff-avatar">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="staff-role">Владелец</div>
+                        <h3>Денис Васильевич Давыдов</h3>
+                        <p>Основатель и идейный вдохновитель сообщества</p>
+                    </div>
+                    <div class="staff-card high-admin">
+                        <div class="staff-avatar">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="staff-role">Со-Владелец</div>
+                        <h3>Тамерлан Тимир Аксак</h3>
+                        <p>Соучредитель и технический директор</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="staff-category">
+                <h3 class="category-title">Администрация</h3>
+                <div class="staff-grid">
+                    <div class="staff-card admin">
+                        <div class="staff-avatar">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="staff-role">Администратор</div>
+                        <h3>Святослав Игорьевич</h3>
+                        <p>Главный администратор и модератор</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="staff-category">
+                <h3 class="category-title">Заместители</h3>
+                <div class="staff-grid">
+                    <div class="staff-card deputy">
+                        <div class="staff-avatar">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="staff-role">Заместитель</div>
+                        <h3>Иван IV Васильевич</h3>
+                        <p>Заместитель администрации и помощник</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section class="rules" id="rules">
+        <div class="container">
+            <h2 class="section-title">Правила Сервера</h2>
+            <p class="section-subtitle">Для поддержания дружеской и комфортной атмосферы</p>
+            
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="rule-content">
+                        <h3>Уважайте друг друга</h3>
+                        <p>Не допускается оскорблений, дискриминации и травли участников. Будьте вежливы и терпимы.</p>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <div class="rule-content">
+                        <h3>Без спама и флуда</h3>
+                        <p>Запрещен спам, флуд, массовые упоминания и чрезмерное использование капса.</p>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="rule-content">
+                        <h3>Контент 18+</h3>
+                        <p>Материалы для взрослых разрешены только в специально предназначенных для этого каналах.</p>
+                    </div>
+                </div>
+                
+                <div class="rule-item">
+                    <div class="rule-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <div class="rule-content">
+                        <h3>Следуйте теме каналов</h3>
+                        <p>Публикуйте контент в соответствующих тематических каналах для поддержания порядка.</p>
+                    </div>
+                </div>
+                
+                <div class="rule-item special">
+                    <div class="rule-icon">
+                        <i class="fas fa-peace"></i>
+                    </div>
+                    <div class="rule-content">
+                        <h3>
+                            Правило "Без Нигатива"
+                            <span class="special-badge">Новое</span>
+                        </h3>
+                        <p>После жестких оскарблений обязательно добавляйте фразу "Без Нигатива" чтобы показать, что конфликт исчерпан и все в порядке.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PC Friend Community</h3>
+                    <p>Лучшее сообщество для геймеров и IT-энтузиастов. Присоединяйся к нашей дружной семье!</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <div class="footer-links">
+                        <a href="#home">Главная</a>
+                        <a href="#staff">Наша команда</a>
+                        <a href="#rules">Правила</a>
+                        <a href="#join">Присоединиться</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Помощь</h3>
+                    <div class="footer-links">
+                        <a href="#">Частые вопросы</a>
+                        <a href="#">Поддержка</a>
+                        <a href="#">Контакты</a>
+                        <a href="#">Пожертвования</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC Friend Community. Все права защищены.</p>
+                <p style="color: #72767d; margin-top: 10px; font-size: 0.9rem;">
+                    Discord - торговая марка Discord Inc. | Сайт создан с ❤️ для нашего сообщества
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Bar Animation
+        window.addEventListener('load', () => {
+            const loadingBar = document.getElementById('loadingBar');
+            loadingBar.style.width = '100%';
+            setTimeout(() => {
+                loadingBar.style.opacity = '0';
+                setTimeout(() => loadingBar.remove(), 300);
+            }, 500);
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset;
+            const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+            const loadingBar = document.getElementById('loadingBar');
+            if (loadingBar) {
+                loadingBar.style.width = scrollPercent + '%';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe staff cards
+        document.querySelectorAll('.staff-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Observe rule items
+        document.querySelectorAll('.rule-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 31, 34, 0.98)';
+            } else {
+                header.style.background = 'rgba(30, 31, 34, 0.95)';
+            }
+        });
+
+        console.log('🚀 PC Friend Community website loaded successfully!');
+        console.log('💡 Для редактирования сайта откройте файл в текстовом редакторе и измените нужные элементы.');
+    </script>
+</body>
+</html>
